@@ -1,0 +1,48 @@
+
+        {% load render_table from django_tables2 %}
+        {% load static %}
+        {% csrf_token %} 
+
+        
+        <!doctype html>
+        <html>
+        <link rel="stylesheet" href="{% static 'button.css' %}">
+            <head>
+      
+
+            </head>
+            <body>
+            
+            <a href="../addmatch"><button class="glow-on-hover" type="button">ADD MATCH</button></a>
+            <a href="../testpage"><button class="glow-on-hover" type="button">RANKING</button></a>
+            <a href="../adduser"><button class="glow-on-hover" type="button">ADD USER</button></a>
+                <form>
+                    <input type="text" id="adduseid" class="glow-on-hover" adduser="adduser" placeholder="username eingeben">
+
+                  </form>
+                  <button onclick="adduser()" class="glow-on-hover" type="button">User Hinzufügen</button>
+                  
+
+
+                <script>
+                    function adduser() {
+                        let username = document.getElementById('adduseid').value
+                        // var username = document.getElementById("adduserid").value;
+                        // 
+                        let token = '{{ csrf_token }}';
+                        let formData = new FormData();
+                        formData.append('username', username);
+                        formData.append('csrfmiddlewaretoken', token);
+
+
+                        fetch('/adduser', {
+                            method: 'POST',
+                            body: formData
+                        }).then( () => {
+                            window.location.reload();
+                        });
+                    }
+                </script>
+
+            </body>
+        </html>

@@ -1,0 +1,112 @@
+
+        {% load render_table from django_tables2 %}
+        {% load static %}
+        {% csrf_token %} 
+
+        
+        <!doctype html>
+        <html>
+        <link rel="stylesheet" href="{% static 'button.css' %}">
+            <head>
+
+
+                </script>
+
+
+            </head>
+            <body>
+
+      
+            <button class="glow-on-hover" type="button">ADD MATCH</button>
+            <a href="../testpage"><button class="glow-on-hover" type="button">RANKING</button></a>
+            <a href="../adduser"><button class="glow-on-hover" type="button">ADD USER</button></a>
+
+
+                <form>
+                    <h1>Team 1</h1>
+                    <form method="POST">
+                        <select name="item_usernname">
+                        {% for item in resultaddmatch %}
+                            <option ID="t1n1"  value="{{ item.username }}">{{ item.username }}</option>
+                        {% endfor %}
+                        </select>
+                        </form>
+                        <form method="POST">
+                            <select name="item_usernname">
+                            {% for item in resultaddmatch %}
+                                <option ID="t1n2" value="{{ item.username }}">{{ item.username }}</option>
+                            {% endfor %}
+                            </select>
+                            </form>
+                    
+                    <h1>Team 2</h1>
+                    <form method="POST">
+                        <select name="item_usernname">
+                        {% for item in resultaddmatch %}
+                            <option ID="t2n1" value="{{ item.username }}">{{ item.username }}</option>
+                        {% endfor %}
+                        </select>
+                        </form>
+                        <form method="POST">
+                            <select name="item_usernname">
+                            {% for item in resultaddmatch %}
+                                <option ID="t2n2" value="{{ item.username }}">{{ item.username }}</option>
+                            {% endfor %}
+                            </select>
+                            </form>
+
+                    <h1>Spielstand</h1>
+                    <input type="text" id="matchpointsteam1" class="glow-on-hover" adduser="adduser" placeholder="Punkte Team 1">
+                    <input type="text" id="matchpointsteam2" class="glow-on-hover" adduser="adduser" placeholder="Punkte Team 2">
+                  </form>
+                  
+                  <form>
+                    <button onclick="addmatch()" class="glow-on-hover" type="button">Add MATCH</button>
+                  </form>
+
+
+                  <table>
+
+                    {% for item in resultaddmatch %}
+                    <tr>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.wins }}</td>
+                        <td>{{ item.games }}</td>
+                    </tr>
+
+                    {% endfor %}
+
+
+
+                    <script>
+                        function addmatch() {
+                            let goalsteam1 = document.getElementById('matchpointsteam1').value
+                            let goalsteam2 = document.getElementById('matchpointsteam2').value
+                            let nameIDt1n1 = document.getElementById('t1n1').value
+                            let nameIDt1n2 = document.getElementById('t1n2').value
+                            let nameIDt2n1 = document.getElementById('t2n1').value
+                            let nameIDt2n2 = document.getElementById('t2n2').value
+
+                            let token = '{{ csrf_token }}';
+                            let formData = new FormData();
+                            formData.append('goalsteam1', goalsteam1);
+                            formData.append('goalsteam2', goalsteam2);
+                            formData.append('nameIDt1n1', nameIDt1n1);
+                            formData.append('nameIDt1n2', nameIDt1n2);
+                            formData.append('nameIDt2n1', nameIDt2n1);
+                            formData.append('nameIDt2n2', nameIDt2n2);
+                            formData.append('csrfmiddlewaretoken', token);
+    
+    
+                            fetch('/addmatch', {
+                                method: 'POST',
+                                body: formData
+                            }).then( () => {
+                                window.location.reload();
+                            });
+                        }
+                    </script>
+
+            </body>
+
+        </html>
