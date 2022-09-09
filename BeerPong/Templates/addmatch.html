@@ -24,33 +24,33 @@
 
                 <form>
                     <h1>Team 1</h1>
-                    <form method="POST">
-                        <select name="item_usernname">
+                    <form>
+                        <select id="t1n1" name="item_usernname">
                         {% for item in resultaddmatch %}
-                            <option ID="t1n1"  value="{{ item.username }}">{{ item.username }}</option>
+                            <option value="{{ item.username }}">{{ item.username }}</option>
                         {% endfor %}
                         </select>
                         </form>
-                        <form method="POST">
-                            <select name="item_usernname">
+                        <form>
+                            <select id="t1n2" name="item_usernname">
                             {% for item in resultaddmatch %}
-                                <option ID="t1n2" value="{{ item.username }}">{{ item.username }}</option>
+                                <option value="{{ item.username }}">{{ item.username }}</option>
                             {% endfor %}
                             </select>
                             </form>
                     
                     <h1>Team 2</h1>
-                    <form method="POST">
-                        <select name="item_usernname">
+                    <form>
+                        <select id="t2n1" name="item_usernname">
                         {% for item in resultaddmatch %}
-                            <option ID="t2n1" value="{{ item.username }}">{{ item.username }}</option>
+                            <option value="{{ item.username }}">{{ item.username }}</option>
                         {% endfor %}
                         </select>
                         </form>
-                        <form method="POST">
-                            <select name="item_usernname">
+                        <form>
+                            <select id="t2n2" name="item_usernname">
                             {% for item in resultaddmatch %}
-                                <option ID="t2n2" value="{{ item.username }}">{{ item.username }}</option>
+                                <option value="{{ item.username }}">{{ item.username }}</option>
                             {% endfor %}
                             </select>
                             </form>
@@ -86,6 +86,7 @@
                             let nameIDt1n2 = document.getElementById('t1n2').value
                             let nameIDt2n1 = document.getElementById('t2n1').value
                             let nameIDt2n2 = document.getElementById('t2n2').value
+                            console.log(nameIDt1n1,nameIDt1n2,nameIDt2n1,nameIDt2n2);
 
                             let token = '{{ csrf_token }}';
                             let formData = new FormData();
@@ -97,7 +98,8 @@
                             formData.append('nameIDt2n2', nameIDt2n2);
                             formData.append('csrfmiddlewaretoken', token);
     
-    
+                            console.log(nameIDt1n1,nameIDt1n2,nameIDt2n1,nameIDt2n2);
+                            return;
                             fetch('/addmatch', {
                                 method: 'POST',
                                 body: formData
