@@ -30,7 +30,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'h2986234.stratoserver.net',
     '85.214.91.197',
-    ' beerpong.rbaehner.de',
+    'beerpong.rbaehner.de',
 
 ]
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'BeerPong',
     'django_tables2',
+    
 ]
 
 MIDDLEWARE = [
