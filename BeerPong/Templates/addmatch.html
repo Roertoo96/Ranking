@@ -99,7 +99,6 @@
                             formData.append('csrfmiddlewaretoken', token);
     
                             console.log(nameIDt1n1,nameIDt1n2,nameIDt2n1,nameIDt2n2);
-                            return;
                             fetch('/addmatch', {
                                 method: 'POST',
                                 body: formData

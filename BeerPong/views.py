@@ -8,6 +8,8 @@ from .models import BeerPongRankingTable
 
 
 
+
+
 # Create your views here.
 
 
@@ -49,7 +51,16 @@ def testpage(request):
     print("-----------------------------")
     #data2 = BeerPongRankingTable.objects.filter(id = 1).update(wins=1)
 
-    #data2 = BeerPongRankingTable.objects.filter(id = 3).update(username='rbanew55')
+    data2 = BeerPongRankingTable.objects.filter(id = 1).update(username='RBA')
+    data2 = BeerPongRankingTable.objects.filter(id = 2).update(username='CHW')
+    data2 = BeerPongRankingTable.objects.filter(id = 3).update(username='CJ')
+    data2 = BeerPongRankingTable.objects.filter(id = 4).update(username='NBA')
+    data2 = BeerPongRankingTable.objects.filter(id = 5).update(username='FN')
+    data2 = BeerPongRankingTable.objects.filter(id = 6).update(username='JS')
+    data2 = BeerPongRankingTable.objects.filter(id = 7).update(username='PHA')
+    #BeerPongRankingTable.objects.filter(id=11).delete()
+
+
     # print(data2)
 
 
@@ -106,45 +117,63 @@ def addmatch(request):
 
 
 
+    rank = BeerPongRankingTable.objects.filter()
+
     if request.method == 'POST':
         pointsteam1 = request.POST['goalsteam1']
         pointsteam2 = request.POST['goalsteam2']
         usernameIDt1n1 = request.POST['nameIDt1n1']
-        print(usernameIDt1n1)
         usernameIDt1n2 = request.POST['nameIDt1n2']
-        print(usernameIDt1n2)
         usernameIDt2n1 = request.POST['nameIDt2n1']
         usernameIDt2n2 = request.POST['nameIDt2n2']
-       #print(pointsteam1, pointsteam2, usernameIDt1n1, usernameIDt1n2, usernameIDt2n1, usernameIDt2n2)
-
 
         DatanameIDt1n1 = BeerPongRankingTable.objects.filter(username = usernameIDt1n1)
-        # print(DatanameIDt1n1)
         DatanameIDt1n1json = serializers.serialize('json', DatanameIDt1n1)
         DatanameIDt1n1list = json.loads(DatanameIDt1n1json)
-        # print(DatanameIDt1n1list)
         t1n1gusername = DatanameIDt1n1list[0]['fields']['username']
         t1n1games = DatanameIDt1n1list[0]['fields']['games']
-        # print(t1n1games, t1n1gusername)
         t1n1gamesnew = t1n1games + 1
-        # print(t1n1gamesnew)
-        Dataend = BeerPongRankingTable.objects.filter(username = t1n1gusername).update(games = t1n1gamesnew)
-
-
-
+        BeerPongRankingTable.objects.filter(username = t1n1gusername).update(games = t1n1gamesnew)
 
         DatanameIDt1n2 = BeerPongRankingTable.objects.filter(username = usernameIDt1n2)
-        print(DatanameIDt1n2)
         DatanameIDt1n2json = serializers.serialize('json', DatanameIDt1n2)
         DatanameIDt1n2list = json.loads(DatanameIDt1n2json)
-        print(DatanameIDt1n2list)
         t1n2gusername = DatanameIDt1n2list[0]['fields']['username']
         t1n2games = DatanameIDt1n2list[0]['fields']['games']
-        print(t1n2games, t1n2gusername)
         t1n2gamesnew = t1n2games + 1
-        print(t1n2gamesnew)
-        Dataend2 = BeerPongRankingTable.objects.filter(username = t1n2gusername).update(games = t1n2gamesnew)
-        print(Dataend2)
+        BeerPongRankingTable.objects.filter(username = t1n2gusername).update(games = t1n2gamesnew)
+
+        DatanameIDt2n1 = BeerPongRankingTable.objects.filter(username = usernameIDt2n1)
+        DatanameIDt2n1json = serializers.serialize('json', DatanameIDt2n1)
+        DatanameIDt2n1list = json.loads(DatanameIDt2n1json)
+        t2n1gusername = DatanameIDt2n1list[0]['fields']['username']
+        t2n1games = DatanameIDt2n1list[0]['fields']['games']
+        t2n1gamesnew = t2n1games + 1
+        BeerPongRankingTable.objects.filter(username = t2n1gusername).update(games = t2n1gamesnew)
+
+        DatanameIDt2n2 = BeerPongRankingTable.objects.filter(username = usernameIDt2n2)
+        DatanameIDt2n2json = serializers.serialize('json', DatanameIDt2n2)
+        DatanameIDt2n2list = json.loads(DatanameIDt2n2json)
+        t2n2gusername = DatanameIDt2n2list[0]['fields']['username']
+        t2n2games = DatanameIDt2n2list[0]['fields']['games']
+        t2n2gamesnew = t2n2games + 1
+        BeerPongRankingTable.objects.filter(username = t2n2gusername).update(games = t2n2gamesnew)
+
+        print(pointsteam1, pointsteam2)
+        if pointsteam1 >= pointsteam2:
+            t1n1wins = DatanameIDt1n1list[0]['fields']['wins']
+            t1n2wins = DatanameIDt1n2list[0]['fields']['wins']
+            t1n1winsnew = t1n1wins +1
+            t1n2winsnew = t1n2wins +1
+            BeerPongRankingTable.objects.filter(username = t1n1gusername).update(wins = t1n1winsnew)
+            BeerPongRankingTable.objects.filter(username = t1n2gusername).update(wins = t1n2winsnew)
+        elif pointsteam1 <= pointsteam2:
+            t2n1wins = DatanameIDt2n1list[0]['fields']['wins']
+            t2n2wins = DatanameIDt2n2list[0]['fields']['wins']
+            t2n1winsnew = t2n1wins +1
+            t2n2winsnew = t2n2wins +1
+            BeerPongRankingTable.objects.filter(username = t2n1gusername).update(wins = t2n1winsnew)
+            BeerPongRankingTable.objects.filter(username = t2n2gusername).update(wins = t2n2winsnew)
 
 
     else:
