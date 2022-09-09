@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    'h2986234.stratoserver.net',
+    '85.214.91.197',
+    ' beerpong.rbaehner.de',
 
 ]
 
