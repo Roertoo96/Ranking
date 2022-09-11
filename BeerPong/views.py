@@ -27,8 +27,8 @@ def discordbot(pointsteam1, pointsteam2):
 
 
     async def status_task():
-        while True:
-            await client.change_presence(activity=discord.Game('BeerPongBot'), status=discord.Status.online)
+         while True:
+             await client.change_presence(activity=discord.Game('BeerPongBot'), status=discord.Status.online)
 
 
     async def send(message):
