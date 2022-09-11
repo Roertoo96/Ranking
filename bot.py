@@ -22,4 +22,4 @@ async def send(message):
     await client.get_channel(1018157039127642113).send(message)
 
 
-client.run('MTAxODE1NzQwNzIyMzkzOTA3Mg.GqgUdX.pF21GqW3KIy11HYL55jfl0SOVWQoM55n2VFQDM')
+client.run('MTAxODE1NzQwNzIyMzkzOTA3Mg.Gd3egj.P5DAsAlYrbfYKbzJb0aHNdTn-8fPddkmkGNQYo')
