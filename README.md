@@ -18,3 +18,7 @@ python manage.py runserver your_server_ip:8000
 - Install git
 sudo apt-get update
 sudo apt-get install git-all.
+
+
+Install packages:
+pip install discord.py
