@@ -5,12 +5,35 @@ from django.shortcuts import render
 from .models import BeerPongRankingTable
 from django.core import serializers
 from .models import BeerPongRankingTable
+import discord
+from .discord import DCTOKEN
 
 
 
+def discordbot(pointsteam1, pointsteam2):
+    intents = discord.Intents.default()
+    intents.message_content = True
+
+    client = discord.Client(intents=intents)
+
+    message = pointsteam1
+    @client.event
+    async def on_ready():
+        print('Wir sind eingeloggt als User {}'.format(client.user.name))
+        client.loop.create_task(send(message))
+        client.loop.create_task(status_task())
 
 
-# Create your views here.
+    async def status_task():
+        while True:
+            await client.change_presence(activity=discord.Game('BeerPongBot'), status=discord.Status.online)
+
+
+    async def send(message):
+        await client.get_channel(1018157039127642113).send(message)
+
+
+    client.run(DCTOKEN)
 
 
 def home(request):
@@ -160,6 +183,7 @@ def addmatch(request):
         BeerPongRankingTable.objects.filter(username = t2n2gusername).update(games = t2n2gamesnew)
 
         print(pointsteam1, pointsteam2)
+        discordbot(pointsteam1,pointsteam2)
         if pointsteam1 >= pointsteam2:
             t1n1wins = DatanameIDt1n1list[0]['fields']['wins']
             t1n2wins = DatanameIDt1n2list[0]['fields']['wins']
