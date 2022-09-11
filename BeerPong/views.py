@@ -13,6 +13,8 @@ from .discord import DCTOKEN
 def discordbot(pointsteam1, pointsteam2):
     intents = discord.Intents.default()
     intents.message_content = True
+    print(pointsteam1)
+    print(pointsteam2)
 
     client = discord.Client(intents=intents)
 
