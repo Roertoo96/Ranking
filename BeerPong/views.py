@@ -10,9 +10,10 @@ from .discord import DCTOKEN
 
 
 
-def discordbot(pointsteam1, pointsteam2):
+def discordbot(pointsteam1, pointsteam2, usernameIDt1n1, usernameIDt1n2, usernameIDt2n1, usernameIDt2n2):
     intents = discord.Intents.default()
     intents.message_content = True
+
     print(pointsteam1)
     print(pointsteam2)
 
@@ -32,7 +33,7 @@ def discordbot(pointsteam1, pointsteam2):
 
 
     async def send(message):
-        await client.get_channel(1019713905766969354).send('Spielstand'+message)
+        await client.get_channel(1019713905766969354).send('Folgendes Spiel wurde hinzugefügt: Team 1:', usernameIDt1n1, usernameIDt1n2,'mit',pointsteam1, 'Punkten.',' - ' 'Team 2:', usernameIDt2n1,usernameIDt2n2,'mit',pointsteam2, 'Punkten.' )
 
 
     client.run(DCTOKEN)
@@ -185,7 +186,7 @@ def addmatch(request):
         BeerPongRankingTable.objects.filter(username = t2n2gusername).update(games = t2n2gamesnew)
 
         print(pointsteam1, pointsteam2)
-        discordbot(pointsteam1,pointsteam2)
+        
         if pointsteam1 >= pointsteam2:
             t1n1wins = DatanameIDt1n1list[0]['fields']['wins']
             t1n2wins = DatanameIDt1n2list[0]['fields']['wins']
@@ -201,6 +202,7 @@ def addmatch(request):
             BeerPongRankingTable.objects.filter(username = t2n1gusername).update(wins = t2n1winsnew)
             BeerPongRankingTable.objects.filter(username = t2n2gusername).update(wins = t2n2winsnew)
 
+        discordbot(pointsteam1,pointsteam2, usernameIDt1n1, usernameIDt1n2, usernameIDt2n1, usernameIDt2n2)
 
     else:
         print('keine Daten')
