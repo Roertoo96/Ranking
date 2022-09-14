@@ -32,7 +32,7 @@ def discordbot(pointsteam1, pointsteam2):
 
 
     async def send(message):
-        await client.get_channel(1018157039127642113).send('Spielstand'+message)
+        await client.get_channel(1019713905766969354).send('Spielstand'+message)
 
 
     client.run(DCTOKEN)
