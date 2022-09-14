@@ -19,7 +19,7 @@ def discordbot(pointsteam1, pointsteam2, usernameIDt1n1, usernameIDt1n2, usernam
 
     client = discord.Client(intents=intents)
 
-    message = pointsteam1
+    message = 'Folgendes Spiel wurde hinzugefügt: Team 1:', usernameIDt1n1, usernameIDt1n2,'mit',pointsteam1, 'Punkten.',' - ' 'Team 2:', usernameIDt2n1,usernameIDt2n2,'mit',pointsteam2, 'Punkten.' 
     @client.event
     async def on_ready():
         print('Wir sind eingeloggt als User {}'.format(client.user.name))
@@ -33,7 +33,7 @@ def discordbot(pointsteam1, pointsteam2, usernameIDt1n1, usernameIDt1n2, usernam
 
 
     async def send(message):
-        await client.get_channel(1019713905766969354).send('Folgendes Spiel wurde hinzugefügt: Team 1:', usernameIDt1n1, usernameIDt1n2,'mit',pointsteam1, 'Punkten.',' - ' 'Team 2:', usernameIDt2n1,usernameIDt2n2,'mit',pointsteam2, 'Punkten.' )
+        await client.get_channel(1019713905766969354).send(message)
 
 
     client.run(DCTOKEN)
