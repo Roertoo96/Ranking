@@ -14,12 +14,12 @@ def discordbot(pointsteam1, pointsteam2, usernameIDt1n1, usernameIDt1n2, usernam
     intents = discord.Intents.default()
     intents.message_content = True
 
-    print(pointsteam1)
-    print(pointsteam2)
+
 
     client = discord.Client(intents=intents)
 
-    message = 'Folgendes Spiel wurde hinzugefügt: Team 1:', usernameIDt1n1, usernameIDt1n2,'mit',pointsteam1, 'Punkten.',' - ' 'Team 2:', usernameIDt2n1,usernameIDt2n2,'mit',pointsteam2, 'Punkten.' 
+    message = "Folgendes Spiel wurde hinzugefügt: Team 1:", usernameIDt1n1, usernameIDt1n2,"mit",pointsteam1, "Punkten. - , Team 2:", usernameIDt2n1,usernameIDt2n2,"mit",pointsteam2, "Punkten."
+    print(message)
     @client.event
     async def on_ready():
         print('Wir sind eingeloggt als User {}'.format(client.user.name))
