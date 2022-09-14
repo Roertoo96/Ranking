@@ -1,4 +1,5 @@
 from dataclasses import Field
+from email import message
 import json
 from unittest import result
 from django.shortcuts import render
@@ -14,26 +15,31 @@ def discordbot(pointsteam1, pointsteam2, usernameIDt1n1, usernameIDt1n2, usernam
     intents = discord.Intents.default()
     intents.message_content = True
 
+    if pointsteam1 >= pointsteam2:
+        winner = 'Team1'
+    elif pointsteam1 <= pointsteam2:
+        winner = 'Team2'
+
 
 
     client = discord.Client(intents=intents)
 
-    message = "Folgendes Spiel wurde hinzugefügt: Team 1:", usernameIDt1n1, usernameIDt1n2,"mit",pointsteam1, "Punkten. - , Team 2:", usernameIDt2n1,usernameIDt2n2,"mit",pointsteam2, "Punkten."
-    print(message)
+
     @client.event
     async def on_ready():
         print('Wir sind eingeloggt als User {}'.format(client.user.name))
-        client.loop.create_task(send(message))
+        client.loop.create_task(send())
         client.loop.create_task(status_task())
-
 
     async def status_task():
          while True:
              await client.change_presence(activity=discord.Game('BeerPongBot'), status=discord.Status.online)
 
 
-    async def send(message):
-        await client.get_channel(1019713905766969354).send(message)
+    async def send():
+        await client.get_channel(1019713905766969354).send("Folgendes Spiel wurde hinzugefügt: Team 1: " + usernameIDt1n1 + " und " + usernameIDt1n2 +" mit " +pointsteam1 + " Punkten. " + 
+        " Team 2: " + usernameIDt2n1 + " und " + usernameIDt2n2 + " mit " + pointsteam2 + " Punkten." +
+         " Der Gewinner ist: " + winner )
 
 
     client.run(DCTOKEN)
