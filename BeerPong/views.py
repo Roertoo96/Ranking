@@ -77,7 +77,6 @@ def BeerPongRank(request):
 def testpage(request):
     data = BeerPongRankingTable.objects.all()
 
-    print(data)
 
     print("-----------------------------")
     print("-----------------------------")

@@ -7,6 +7,7 @@
         <!doctype html>
         <html>
         <link rel="stylesheet" href="{% static 'button.css' %}">
+
             <head>
 
 
@@ -60,9 +61,15 @@
                     <input type="text" id="matchpointsteam2" class="glow-on-hover" adduser="adduser" placeholder="Punkte Team 2">
                   </form>
                   
+
+
                   <form>
-                    <button onclick="addmatch()" class="glow-on-hover" type="button">Add MATCH</button>
+                    <button onclick="addmatch()" class="btn" type="button">Add MATCH</button>
+
+                    
                   </form>
+
+
 
 
                   <table>
@@ -75,6 +82,7 @@
                     </tr>
 
                     {% endfor %}
+
 
 
 
@@ -107,6 +115,9 @@
                             });
                         }
                     </script>
+
+
+
 
             </body>
 
