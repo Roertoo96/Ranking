@@ -11,6 +11,8 @@ from BeerPong.views import addmatch
 from BeerPong.views import adduser
 
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', home),
@@ -19,4 +21,5 @@ urlpatterns = [
     path('testpage/', testpage),
     path('addmatch', addmatch),
     path('adduser', adduser),
+
 ]

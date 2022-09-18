@@ -11,38 +11,38 @@ from .discord import DCTOKEN
 
 
 
-def discordbot(pointsteam1, pointsteam2, usernameIDt1n1, usernameIDt1n2, usernameIDt2n1, usernameIDt2n2):
-    intents = discord.Intents.default()
-    intents.message_content = True
+# def discordbot(pointsteam1, pointsteam2, usernameIDt1n1, usernameIDt1n2, usernameIDt2n1, usernameIDt2n2):
+#     intents = discord.Intents.default()
+#     intents.message_content = True
 
-    if pointsteam1 >= pointsteam2:
-        winner = 'Team1'
-    elif pointsteam1 <= pointsteam2:
-        winner = 'Team2'
-
-
-
-    client = discord.Client(intents=intents)
+#     if pointsteam1 >= pointsteam2:
+#         winner = 'Team1'
+#     elif pointsteam1 <= pointsteam2:
+#         winner = 'Team2'
 
 
-    @client.event
-    async def on_ready():
-        print('Wir sind eingeloggt als User {}'.format(client.user.name))
-        client.loop.create_task(send())
-        client.loop.create_task(status_task())
 
-    async def status_task():
-         while True:
-             await client.change_presence(activity=discord.Game('BeerPongBot'), status=discord.Status.online)
+#     client = discord.Client(intents=intents)
 
 
-    async def send():
-        await client.get_channel(1019713905766969354).send("Folgendes Spiel wurde hinzugefügt: Team 1: " + usernameIDt1n1 + " und " + usernameIDt1n2 +" mit " +pointsteam1 + " Punkten. " + 
-        " Team 2: " + usernameIDt2n1 + " und " + usernameIDt2n2 + " mit " + pointsteam2 + " Punkten." +
-         " Der Gewinner ist: " + winner )
+#     @client.event
+#     async def on_ready():
+#         print('Wir sind eingeloggt als User {}'.format(client.user.name))
+#         client.loop.create_task(send())
+#         client.loop.create_task(status_task())
+
+#     async def status_task():
+#          while True:
+#              await client.change_presence(activity=discord.Game('BeerPongBot'), status=discord.Status.online)
 
 
-    client.run(DCTOKEN)
+#     async def send():
+#         await client.get_channel(1019713905766969354).send("Folgendes Spiel wurde hinzugefügt: Team 1: " + usernameIDt1n1 + " und " + usernameIDt1n2 +" mit " +pointsteam1 + " Punkten. " + 
+#         " Team 2: " + usernameIDt2n1 + " und " + usernameIDt2n2 + " mit " + pointsteam2 + " Punkten." +
+#          " Der Gewinner ist: " + winner )
+
+
+#     client.run(DCTOKEN)
 
 
 def home(request):
@@ -76,58 +76,38 @@ def BeerPongRank(request):
 
 def testpage(request):
     data = BeerPongRankingTable.objects.all()
+    aaa = BeerPongRankingTable.objects.order_by('-wins')
+    for i in range(1, len(aaa) + 1):
+        aaa[i - 1].rank = i
+        aaa[i - 1].save()
+        print('aaa[i].wins', aaa[i-1].wins, type(aaa))
+        
+    #context2 = {'fff': aaa}
 
 
     print("-----------------------------")
     print("-----------------------------")
     #data2 = BeerPongRankingTable.objects.filter(id = 1).update(wins=1)
 
-    data2 = BeerPongRankingTable.objects.filter(id = 1).update(username='RBA')
-    data2 = BeerPongRankingTable.objects.filter(id = 2).update(username='CHW')
-    data2 = BeerPongRankingTable.objects.filter(id = 3).update(username='CJ')
-    data2 = BeerPongRankingTable.objects.filter(id = 4).update(username='NBA')
-    data2 = BeerPongRankingTable.objects.filter(id = 5).update(username='FN')
-    data2 = BeerPongRankingTable.objects.filter(id = 6).update(username='JS')
-    data2 = BeerPongRankingTable.objects.filter(id = 7).update(username='PHA')
+    # data2 = BeerPongRankingTable.objects.filter(id = 1).update(username='RBA')
+    # data2 = BeerPongRankingTable.objects.filter(id = 2).update(username='CHW')
+    # data2 = BeerPongRankingTable.objects.filter(id = 3).update(username='CJ')
+    # data2 = BeerPongRankingTable.objects.filter(id = 4).update(username='NBA')
+    # data2 = BeerPongRankingTable.objects.filter(id = 5).update(username='FN')
+    # data2 = BeerPongRankingTable.objects.filter(id = 6).update(username='JS')
+    # data2 = BeerPongRankingTable.objects.filter(id = 7).update(username='PHA')
     #BeerPongRankingTable.objects.filter(id=11).delete()
-
-
-    # print(data2)
-
-
-    # # if data2 == 'rba':
-    # #     print('ja')
-    # # else:
-    # #     print('nein')
-
-    # # # print(data)
-
-    # print("-----------------------------")
-    # print("-----------------------------")
 
 
 
     # # ####### Count the databaseentrys 
     # # data3 = BeerPongRankingTable.objects.count()  # Anzahl Regestrierter User
-    # # print(data3) 
-
-    # print("-----------------------------")
-    # print("-----------------------------")
 
     # data4 = BeerPongRankingTable.objects.filter(username = "sdf")
     # data4json =serializers.serialize('json', data4)
-    # print('Data4')
-    # print(data4json)
 
-
-    # print("-----------------------------")
-    # print("-----------------------------")
 
     # data5 = BeerPongRankingTable.objects.get(username = 'rba')
-
-    # print(data5)
-
-
 
 
     return render(request, 'testpage.html', locals())
@@ -207,7 +187,7 @@ def addmatch(request):
             BeerPongRankingTable.objects.filter(username = t2n1gusername).update(wins = t2n1winsnew)
             BeerPongRankingTable.objects.filter(username = t2n2gusername).update(wins = t2n2winsnew)
 
-        discordbot(pointsteam1,pointsteam2, usernameIDt1n1, usernameIDt1n2, usernameIDt2n1, usernameIDt2n2)
+        #discordbot(pointsteam1,pointsteam2, usernameIDt1n1, usernameIDt1n2, usernameIDt2n1, usernameIDt2n2)
 
     else:
         print('keine Daten')
@@ -227,3 +207,15 @@ def adduser(request):
         BeerPongRankingTable.objects.create(username = request.POST['username'])
         print('Received data:', request.POST['username'])
     return render(request, 'adduser.html')
+
+
+# def Rank(request):
+#     aaa = BeerPongRankingTable.objects.order_by('-wins')
+#     for i in range(1, len(aaa) + 1):
+#         aaa[i - 1].rank = i
+#         aaa[i - 1].save()
+#         print('aaa[i].wins', aaa[i-1].wins, type(aaa))
+    
+#     context2 = {'fff': aaa}
+
+#     return render(request, 'rank.html', context2)
