@@ -1,6 +1,7 @@
 from dataclasses import Field
 from email import message
 import json
+from multiprocessing import context
 from unittest import result
 from django.shortcuts import render
 from .models import BeerPongRankingTable
@@ -74,7 +75,7 @@ def BeerPongRank(request):
 
 
 
-def testpage(request):
+def ranking(request):
     data = BeerPongRankingTable.objects.all()
     aaa = BeerPongRankingTable.objects.order_by('-wins')
     for i in range(1, len(aaa) + 1):
@@ -82,20 +83,13 @@ def testpage(request):
         aaa[i - 1].save()
         print('aaa[i].wins', aaa[i-1].wins, type(aaa))
         
-    #context2 = {'fff': aaa}
+    context2 = {'fff': aaa}
 
 
-    print("-----------------------------")
-    print("-----------------------------")
+
+
     #data2 = BeerPongRankingTable.objects.filter(id = 1).update(wins=1)
 
-    # data2 = BeerPongRankingTable.objects.filter(id = 1).update(username='RBA')
-    # data2 = BeerPongRankingTable.objects.filter(id = 2).update(username='CHW')
-    # data2 = BeerPongRankingTable.objects.filter(id = 3).update(username='CJ')
-    # data2 = BeerPongRankingTable.objects.filter(id = 4).update(username='NBA')
-    # data2 = BeerPongRankingTable.objects.filter(id = 5).update(username='FN')
-    # data2 = BeerPongRankingTable.objects.filter(id = 6).update(username='JS')
-    # data2 = BeerPongRankingTable.objects.filter(id = 7).update(username='PHA')
     #BeerPongRankingTable.objects.filter(id=11).delete()
 
 
@@ -110,8 +104,8 @@ def testpage(request):
     # data5 = BeerPongRankingTable.objects.get(username = 'rba')
 
 
-    return render(request, 'testpage.html', locals())
-
+    return render(request, 'ranking.html', context2)
+    #return render(request, 'testpage.html', locals())
 
 
 
